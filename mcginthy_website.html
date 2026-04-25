@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Jason McGinthy — Cybersecurity & Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1a2744;
+    --navy-mid: #2e3f6b;
+    --slate: #4a5568;
+    --muted: #8896a8;
+    --accent: #b8965a;
+    --accent-light: #f5efe4;
+    --bg: #fafaf8;
+    --white: #ffffff;
+    --border: rgba(26,39,68,0.12);
+    --border-accent: rgba(184,150,90,0.3);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Crimson Pro', Georgia, serif;
+    background: var(--bg);
+    color: var(--navy);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,250,248,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--navy);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2.5rem 4rem;
+    max-width: 860px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em { font-style: italic; font-weight: 300; }
+  .hero-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+  .hero-bio {
+    font-size: 1.1rem;
+    color: var(--slate);
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--navy); color: #fff; }
+  .btn-primary:hover { background: var(--navy-mid); }
+  .btn-outline {
+    background: transparent;
+    color: var(--navy);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--navy); background: var(--accent-light); }
+
+  /* SECTIONS */
+  section {
+    padding: 4rem 2.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-accent);
+  }
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* RESEARCH */
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .research-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--navy);
+    padding: 1.5rem;
+    transition: border-top-color 0.2s;
+  }
+  .research-card:hover { border-top-color: var(--accent); }
+  .research-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+  .research-card p {
+    font-size: 0.95rem;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  /* PUBLICATIONS */
+  .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .pub-item {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--border);
+    transition: border-left-color 0.2s;
+  }
+  .pub-item:hover { border-left-color: var(--accent); }
+  .pub-item .pub-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+  .pub-item .pub-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-top: 0.25rem;
+  }
+  .pub-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border: 1px solid var(--border-accent);
+    color: var(--accent);
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* CV */
+  .cv-section { margin-bottom: 2.5rem; }
+  .cv-section h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .cv-entry {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    align-items: start;
+  }
+  .cv-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    padding-top: 2px;
+  }
+  .cv-detail .role {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+  .cv-detail .org {
+    font-style: italic;
+    color: var(--slate);
+    font-size: 0.95rem;
+  }
+  .cv-detail .desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+    line-height: 1.5;
+  }
+
+  /* TEACHING */
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .course-card {
+    background: var(--accent-light);
+    border: 1px solid var(--border-accent);
+    padding: 1.25rem;
+    border-radius: 2px;
+  }
+  .course-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.35rem;
+  }
+  .course-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  .contact-item { display: flex; flex-direction: column; gap: 4px; }
+  .contact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .contact-value { font-size: 0.95rem; color: var(--navy); }
+  .contact-value a {
+    color: var(--navy);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-accent);
+  }
+  .contact-value a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 2.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .usafa-badge {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .usafa-dot { width: 8px; height: 8px; background: var(--navy); border-radius: 50%; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { gap: 1rem; }
+    .hero, section, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .cv-entry { grid-template-columns: 1fr; gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#top" class="nav-brand">J. McGinthy</a>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div id="top">
+  <div class="hero">
+    <div class="hero-eyebrow">Assistant Professor &amp; Vice Chair for Cyber Science · Computer &amp; Cyber Sciences</div>
+    <h1>Dr. Jason<br><em>McGinthy</em></h1>
+    <div style="font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 300; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 1.25rem;">// Instructor of Things</div>
+    <div class="hero-title">
+      United States Air Force Academy · Colorado Springs, CO<br>
+      CompTIA Security+ &nbsp;·&nbsp; GMLE &nbsp;·&nbsp; GREM &nbsp;·&nbsp; GCFA
+    </div>
+    <p class="hero-bio">
+      My research sits at the intersection of cybersecurity, cryptography, and artificial intelligence — with a focus on securing resource-constrained systems, understanding how AI reshapes the threat landscape, and developing the next generation of cyber professionals. After 20 years as a U.S. Air Force officer, I retired in August 2024 and transitioned to civilian faculty at USAFA, where I continue to pursue these questions through research, teaching, and cadet mentorship.
+    </p>
+    <div class="hero-links">
+      <a href="#cv" class="btn btn-primary">Curriculum Vitae</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+</div>
+
+<section id="research">
+  <div class="section-label">Research Interests</div>
+  <div class="research-grid">
+    <div class="research-card">
+      <h3>Cyber City</h3>
+      <p>A hands-on cyber operations environment where cadets conduct offensive and defensive operations against real city infrastructure — traffic systems, water, power, and more. Cyber City is a hub for ICS/SCADA security education, digital forensics, and cyber operations training, and serves as a focal point for research collaboration and academic partnerships.</p>
+    </div>
+    <div class="research-card">
+      <h3>Cybersecurity Education</h3>
+      <p>Developing curriculum, pedagogy, and learning environments for the next generation of cyber professionals, with an emphasis on hands-on technical training in military and undergraduate contexts.</p>
+    </div>
+    <div class="research-card">
+      <h3>AI Integration in Security</h3>
+      <p>Exploring how artificial intelligence reshapes both offensive and defensive security — including AI-driven threat detection, neural network-based authentication, and the implications of AI for cyber education.</p>
+    </div>
+    <div class="research-card">
+      <h3>Cryptography</h3>
+      <p>Key derivation functions, session key protocols for low-power devices, PRNG-based cryptographic methods, and lightweight encryption for resource-constrained environments.</p>
+    </div>
+    <div class="research-card">
+      <h3>IoT Security</h3>
+      <p>Authentication, secure node design, and transmission security for Internet of Things devices, with applications to industrial control systems and critical infrastructure — increasingly intersecting with AI and cryptographic methods.</p>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="section-label">Selected Publications</div>
+  <div class="pub-list">
+    <div class="pub-item">
+      <div class="pub-title">Hardware Validation for Semi-Coherent Transmission Security <span class="pub-tag">Journal</span></div>
+      <div class="pub-meta">Fletcher, M., McGinthy, J., &amp; Michaels, A.J. · Information 16(9), 773 · 2025</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Groundwork for Neural Network-Based Specific Emitter Identification Authentication for IoT <span class="pub-tag">Journal</span></div>
+      <div class="pub-meta">McGinthy, J.M., Wong, L.J., &amp; Michaels, A.J. · IEEE Internet of Things Journal · 2019</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Secure Industrial Internet of Things Critical Infrastructure Node Design <span class="pub-tag">Journal</span></div>
+      <div class="pub-meta">McGinthy, J.M. &amp; Michaels, A.J. · IEEE Internet of Things Journal · 2019</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Further Analysis of PRNG-Based Key Derivation Functions <span class="pub-tag">Journal</span></div>
+      <div class="pub-meta">McGinthy, J.M. &amp; Michaels, A.J. · IEEE Access · 2019</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Session Key Derivation for Low Power IoT Devices <span class="pub-tag">Best Paper</span></div>
+      <div class="pub-meta">McGinthy, J.M. &amp; Michaels, A.J. · IEEE International Conference on High Performance and Smart Computing (HPSC) · 2018</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Semi-Coherent Transmission Security for Low Power IoT Devices <span class="pub-tag">Conference</span></div>
+      <div class="pub-meta">McGinthy, J.M. &amp; Michaels, A.J. · IEEE International Conference on Internet of Things (iThings) · 2018</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Lightweight Internet of Things Encryption using Galois Extension Field Arithmetic <span class="pub-tag">Conference</span></div>
+      <div class="pub-meta">McGinthy, J.M. &amp; Michaels, A.J. · IEEE International Conference on Internet of Things (iThings) · 2018</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">An Impedance-Matched 2-Element Superdirective Array <span class="pub-tag">Journal</span></div>
+      <div class="pub-meta">Best, S.R., Altshuler, E.E., Yaghjian, A.D., McGinthy, J.M., &amp; O'Donnell, T.H. · IEEE Antennas and Wireless Propagation Letters · 2008</div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">A Comparison of Electrically Small HF Antennas <span class="pub-tag">Conference</span></div>
+      <div class="pub-meta">Best, S.R. &amp; McGinthy, J.M. · IEEE Antennas and Propagation Society International Symposium · 2005</div>
+    </div>
+  </div>
+  <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--muted);">
+    <a href="https://scholar.google.com/citations?user=Qi9BCgoAAAAJ&hl=en" target="_blank" style="color: var(--accent); border-bottom: 1px solid var(--border-accent); text-decoration: none;">View full profile on Google Scholar</a>
+  </p>
+</section>
+
+<section id="cv">
+  <div class="section-label">Curriculum Vitae</div>
+
+  <div class="cv-section">
+    <h3>Education</h3>
+    <div class="cv-entry">
+      <div class="cv-year">2019</div>
+      <div class="cv-detail">
+        <div class="role">Ph.D., Computer Engineering</div>
+        <div class="org">Virginia Polytechnic Institute and State University</div>
+        <div class="desc">Dissertation: Solutions for Internet of Things Security Challenges: Trust and Authentication</div>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-year">2010</div>
+      <div class="cv-detail">
+        <div class="role">M.S., Electrical Engineering</div>
+        <div class="org">Air Force Institute of Technology</div>
+        <div class="desc">Thesis: Global Navigation Satellite System Software Defined Radio</div>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-year">2003</div>
+      <div class="cv-detail">
+        <div class="role">B.S., Electrical and Electronics Engineering</div>
+        <div class="org">Marquette University</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <h3>Academic Appointments</h3>
+    <div class="cv-entry">
+      <div class="cv-year">Aug 2024–Present</div>
+      <div class="cv-detail">
+        <div class="role">Assistant Professor &amp; Vice Chair for Cyber Science</div>
+        <div class="org">Department of Computer and Cyber Sciences, United States Air Force Academy</div>
+        <div class="desc">Oversee all Cyber Science courses and curriculum as Vice Chair. Teaching Cyber Warfare, Cryptography, Computer Organization and Architecture, and Introduction to Programming. Leading cadet research teams in IoT cybersecurity, asset tracking, and lightweight encryption for wireless charging. Awarded $125,000 AFRL research partnership. Serves as program director for Cyber City, a hands-on cyber operations lab and primary hub for external research collaboration and academic partnerships.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <h3>Research</h3>
+    <div class="cv-entry">
+      <div class="cv-year">2022–Present</div>
+      <div class="cv-detail">
+        <div class="role">Principal Investigator — IoT Cybersecurity &amp; Asset Tracking</div>
+        <div class="org">USAFA / Air Force Research Laboratory</div>
+        <div class="desc">$125,000 award. Leading cadet research teams in IoT cybersecurity, asset tracking in austere environments, and lightweight encryption for wireless charging communications.</div>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-year">2016–2019</div>
+      <div class="cv-detail">
+        <div class="role">Graduate Research Assistant</div>
+        <div class="org">Virginia Polytechnic Institute and State University</div>
+        <div class="desc">Developed an IoT device security standardization framework, a PRNG-based KDF achieving 20× performance improvement over existing methods, and demonstrated ML-based physical layer device authentication for IoT.</div>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-year">2013–2016</div>
+      <div class="cv-detail">
+        <div class="role">Research Advisor — Cadet Cybersecurity Projects</div>
+        <div class="org">United States Air Force Academy</div>
+        <div class="desc">Supervised undergraduate research in Bluetooth security and network/firewall security. Designed a cyber demonstration raising awareness of industrial control systems vulnerabilities.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <h3>Honors &amp; Awards</h3>
+    <div class="cv-entry">
+      <div class="cv-year">2019</div>
+      <div class="cv-detail">
+        <div class="role">RSA Conference Security Scholar</div>
+        <div class="org">RSA Conference</div>
+        <div class="desc">One of 50 selected undergraduate and graduate students from U.S. universities.</div>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-year">2018</div>
+      <div class="cv-detail">
+        <div class="role">Best Paper Award</div>
+        <div class="org">IEEE International Conference on High Performance and Smart Computing (HPSC)</div>
+        <div class="desc">"Session Key Derivation for Low Power IoT Devices"</div>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-year">2015</div>
+      <div class="cv-detail">
+        <div class="role">Outstanding New Faculty Member</div>
+        <div class="org">USAFA Department of Computer Science</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <h3>Certifications &amp; Memberships</h3>
+    <div class="cv-entry">
+      <div class="cv-year">Certifications</div>
+      <div class="cv-detail">
+        <div class="role">CompTIA Security+</div>
+        <div class="desc">GIAC Machine Learning Engineer (GMLE) &nbsp;·&nbsp; GIAC Reverse Engineering Malware (GREM) &nbsp;·&nbsp; GIAC Certified Forensic Analyst (GCFA)</div>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-year">Memberships</div>
+      <div class="cv-detail">
+        <div class="role">Institute of Electrical and Electronics Engineers (IEEE)</div>
+        <div class="desc">Reviewer: IEEE Internet of Things Journal, IEEE Transactions on Information Forensics &amp; Security &nbsp;·&nbsp; Eta Kappa Nu Honor Society</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#" class="btn btn-outline" style="margin-top: 0.5rem;">Download Full CV (PDF)</a>
+</section>
+
+<section id="teaching">
+  <div class="section-label">Teaching</div>
+  <p style="color: var(--slate); margin-bottom: 2rem; max-width: 560px;">I teach courses across the computer science and cybersecurity curriculum at USAFA, with a current emphasis on cyber warfare and cryptography.</p>
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-code">Cyber Sci 333</div>
+      <div class="course-name">Cyber Warfare</div>
+    </div>
+    <div class="course-card">
+      <div class="course-code">Cyber Sci 334</div>
+      <div class="course-name">Cyber Defense</div>
+    </div>
+    <div class="course-card">
+      <div class="course-code">Cyber Sci 431</div>
+      <div class="course-name">Cryptography</div>
+    </div>
+    <div class="course-card">
+      <div class="course-code">Comp Sci 110</div>
+      <div class="course-name">Introduction to Computing and Cyber Operations</div>
+    </div>
+    <div class="course-card">
+      <div class="course-code">Comp Sci 210</div>
+      <div class="course-name">Programming Fundamentals</div>
+    </div>
+    <div class="course-card">
+      <div class="course-code">Comp Sci 211</div>
+      <div class="course-name">Introduction to Programming for Scientists and Engineers</div>
+    </div>
+    <div class="course-card">
+      <div class="course-code">Comp Sci 351</div>
+      <div class="course-name">Computer Organization and Architecture</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <span class="contact-label">Email</span>
+      <span class="contact-value"><a href="mailto:jason.mcginthy@afacademy.af.edu">jason.mcginthy@afacademy.af.edu</a></span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Location</span>
+      <span class="contact-value">US Air Force Academy, CO 80840</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Google Scholar</span>
+      <span class="contact-value"><a href="https://scholar.google.com/citations?user=Qi9BCgoAAAAJ&hl=en" target="_blank">scholar.google.com</a></span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">ORCID</span>
+      <span class="contact-value"><a href="https://orcid.org/0000-0002-5146-3166" target="_blank">0000-0002-5146-3166</a></span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">© 2026 Jason McGinthy</span>
+  <div class="usafa-badge">
+    <div class="usafa-dot"></div>
+    United States Air Force Academy
+  </div>
+</footer>
+
+</body>
+</html>
